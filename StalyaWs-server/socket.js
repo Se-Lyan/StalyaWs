@@ -120,3 +120,9 @@ Socket.prototype.emitRoomClient = function(room_name, event_name, clientId){
         const data = JSON.stringify({event_name: event_name, data: args})	
      this.rooms[room_name][clientId].clientIo.write(data);
 }
+
+Socket.prototype.deleteRoom = function(room_name){
+	if(this.rooms[room_name] === undefined) return;
+	
+	delete this.rooms[room_name]
+}

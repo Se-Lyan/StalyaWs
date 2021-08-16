@@ -2,7 +2,7 @@
 
 Welcome to Stalya WebSocket for nodejs
 
-You can't use the library **client** without the library **server** and currently only for **small** project.
+Don't forget before: You can't use the library **client** without the library **server** and currently only for **small** project.
 
 Statut: in progress (24/100%)
 
