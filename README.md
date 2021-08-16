@@ -42,7 +42,7 @@ socket.emit("myEventName", "Hello Server !");
 
 You want to create a special thing for a chat ? 
 For example, you want to emit a chat for a new arrival of a person ?
-Rooms are here, and it's his job 
+Rooms are here, and it's his job. 
 it will allow you to emit some client
 
 Let's take a look :
