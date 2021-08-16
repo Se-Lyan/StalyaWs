@@ -4,7 +4,7 @@ Welcome to Stalya WebSocket for nodejs
 
 You can't use the library **client** without the library **server** and currently only for **small** project.
 
-Statut: in progress 
+Statut: in progress (20/100%)
 
 ## Get Started
 
@@ -29,6 +29,3 @@ socket.on("connect", () => {
  console.log("Connection to server established !");
 })
 ```
-
-
-
