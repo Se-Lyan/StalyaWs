@@ -30,6 +30,7 @@ module.exports = Socket
     	if(this.events.connection)
           this.events.connection({ 
            ipAddress: client.remoteAddress,
+           clientIo: client,
            clientId: clientId,
            emit: this.emit,
            on: this.on
@@ -69,8 +70,10 @@ module.exports = Socket
       const data = JSON.stringify({event_name: event_name, data: args})	
   
     if(isRoom === true){
-    	for(var client in this.rooms){
-  	   client.clientIo.write(data);       
+    	for(var clients in this.rooms){
+    	 for(var client in clients){
+  	    client.clientIo.write(data);      
+         } 
   	}
     } else {
   	for(var client of this.connections){
@@ -78,6 +81,8 @@ module.exports = Socket
      	}
      }
   }
+  
+  // +=======ROOMS=======+
   
   Socket.prototype.createRoom = function(room_name, overwrite_room_if_exist = false){
   if(typeof room_name != "string") throw new Error("Room name can't be undefined or null or anything else, only string. (Specified type: " + typeof isRoom + ")");
@@ -87,4 +92,31 @@ module.exports = Socket
      } else {
      this.rooms[room_name] = {};
    }
+}
+
+Socket.prototype.joinRoom = function(room_name, clientId){
+	if(this.rooms[room_name] === undefined)
+	return;
+	
+	if(this.rooms[room_name][clientId] != undefined)
+	return;
+	
+	this.rooms[room_name][clientId] = {clientId: clientId, clientIo: this.connections.filter(client => client.clientId === clientId)[0].clientIo}
+}
+
+Socket.prototype.emitRoomClient = function(room_name, event_name, clientId){
+	if(this.rooms[room_name] === undefined)
+	return;
+	
+	if(this.rooms[room_name][clientId] === undefined)
+	return;
+	
+	var args = toArray(arguments); 
+   delete args[0];   
+   delete args[1];     
+   delete args[2];
+    args = args.filter(function (arg) { return arg != null; })
+     
+        const data = JSON.stringify({event_name: event_name, data: args})	
+     this.rooms[room_name][clientId].clientIo.write(data);
 }
