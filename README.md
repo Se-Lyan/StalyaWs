@@ -11,7 +11,7 @@ Statut: in progress (24/100%)
 ### Server side example
 
 ```javascript
-const socket = require("StalyaWs")({server: true}) // <--- Everytime true if its the server !
+const socket = require("StalyaWs")({server: true}) // <--- always true if its the server !
 
 //When client connecting to server, you can add a callback
 socket.on("connection", client => {
