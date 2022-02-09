@@ -27,7 +27,7 @@ socket.on("connection", client => {
 ### Client side example
 
 ```javascript
-const io = require("StalyaWs")({server: false}) // <--- Everytime false if its the client ! 
+const io = require("StalyaWs")({server: false}) // <--- always false if its the client ! 
 
 const socket = io("http://localhost:3000"); // Your server hostname and port
 
